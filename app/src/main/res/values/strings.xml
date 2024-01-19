@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FirstRecicler</string>
     <string-array name="divisas">
-        <item>EUR</item>
+        <item>USD</item>
         <item>GBP</item>
         <item>JPY</item>
         <item>AUD</item>

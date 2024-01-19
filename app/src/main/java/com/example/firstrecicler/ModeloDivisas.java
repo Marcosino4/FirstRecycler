@@ -1,5 +1,7 @@
 package com.example.firstrecicler;
 
+import android.graphics.drawable.Drawable;
+
 public class ModeloDivisas {
     public String name;
     public float value;
@@ -16,4 +18,5 @@ public class ModeloDivisas {
     public float getValue() {
         return value;
     }
+
 }
