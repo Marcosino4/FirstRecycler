@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             if(clienteVIP.isChecked()){
                 convert = adaptador.selecDivisa.getValue() * div;
             }else{
-                convert = adaptador.selecDivisa.getValue() * div * 1.2f;
+                convert = adaptador.selecDivisa.getValue() * div * 1.02f;
             }
             String conv = String.valueOf(convert);
             conversion.setText(conv);
