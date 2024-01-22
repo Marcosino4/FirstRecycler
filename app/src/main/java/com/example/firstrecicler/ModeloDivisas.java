@@ -5,10 +5,12 @@ import android.graphics.drawable.Drawable;
 public class ModeloDivisas {
     public String name;
     public float value;
+    public Drawable flag;
 
-    public ModeloDivisas(String name, float value) {
+    public ModeloDivisas(String name, float value, Drawable flag) {
         this.name = name;
         this.value = value;
+        this.flag = flag;
     }
 
     public String getName() {
@@ -19,4 +21,7 @@ public class ModeloDivisas {
         return value;
     }
 
+    public Drawable getFlag() {
+        return flag;
+    }
 }

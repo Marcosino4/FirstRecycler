@@ -1,6 +1,7 @@
 package com.example.firstrecicler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,11 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 convert();
             }
         });
+
+
     }
 
     public void convert(){
 
-        if(!divisa.getText().toString().isEmpty()){
+        if(!divisa.getText().toString().isEmpty() && adaptador.posicionSelec >= 0){
             float div = Float.parseFloat(divisa.getText().toString());
             float convert;
 
@@ -63,17 +67,26 @@ public class MainActivity extends AppCompatActivity {
             }
             String conv = String.valueOf(convert);
             conversion.setText(conv);
-        }else{
+        }else if(divisa.getText().toString().isEmpty()){
             Toast.makeText(this, "Porfavor, introduce una cantidad", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Porfavor, selecciona una moneda", Toast.LENGTH_SHORT).show();
         }
     }
-    private void setDivisas(){
+    private void setDivisas() {
         String[] divisas = getResources().getStringArray(R.array.divisas);
         String[] valores = getResources().getStringArray(R.array.valores);
 
-        for(int i = 0; i < divisas.length; i++){
-            listaDivisas.add(new ModeloDivisas(divisas[i], Float.parseFloat(valores[i])));
+        ArrayList<Integer> imageListId = new ArrayList<Integer>();
+
+        Field[] drawables = R.drawable.class.getFields();
+        for (Field f : drawables) {
+            if (f.getName().contains("f_")) {
+                imageListId.add(getResources().getIdentifier(f.getName(), "drawable", getPackageName()));
+            }
+        }
+            for (int i = 0; i < divisas.length; i++) {
+                listaDivisas.add(new ModeloDivisas(divisas[i], Float.parseFloat(valores[i]), ResourcesCompat.getDrawable(getResources(), imageListId.get(i), null)));
+            }
         }
     }
-
-}

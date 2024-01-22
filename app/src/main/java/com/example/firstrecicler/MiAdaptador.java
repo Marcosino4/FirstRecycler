@@ -2,8 +2,6 @@ package com.example.firstrecicler;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,13 +29,14 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.ViewHolder> {
     @Override
     public MiAdaptador.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row, parent, false);
+        View view = inflater.inflate(R.layout.card_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MiAdaptador.ViewHolder holder, int position) {
         holder.divisa.setText(listaDivisas.get(position).getName());
+        holder.bandera.setImageDrawable(listaDivisas.get(position).getFlag());
         final int pos = position;
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,9 +60,11 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView divisa;
+        ImageView bandera;
         CardView cardView;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
+            bandera = itemView.findViewById(R.id.flag);
             divisa = itemView.findViewById(R.id.divisa);
             cardView = itemView.findViewById(R.id.cardDivisa);
         }
